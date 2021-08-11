@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.nure.ua"
+		xmlns="http://www.nure.ua"
+		elementFormDefault="qualified">
+		
+	<xs:element name = "flowers">
+		<xs:complexType>
+			<xs:sequence>
+			
+				<xs:element name = "flower" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+		
+							<xs:element name = "name">
+                                <xs:simpleType>
+                                    <xs:restriction base = "xs:string">
+                                        <xs:pattern value = "([a-zA-Zа-яА-Я])+"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+							</xs:element>
+			
+							<xs:element name = "soil">
+								<xs:simpleType>
+									<xs:restriction base = "xs:string">
+										<xs:enumeration value = "подзолистая"/>
+										<xs:enumeration value = "грунтовая"/>
+										<xs:enumeration value = "дерново-подзолистая"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+			
+							<xs:element name = "origin">
+                                <xs:simpleType>
+                                    <xs:restriction base = "xs:string">
+                                        <xs:pattern value = "([a-zA-Zа-яА-Я])+"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+							</xs:element>
+			
+							<xs:element name = "visualParameters">
+								<xs:complexType>
+									<xs:sequence>
+					
+										<xs:element name = "stemColour">
+                                            <xs:simpleType>
+                                                <xs:restriction base = "xs:string">
+                                                    <xs:pattern value = "([a-zA-Zа-яА-Я])+"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+										</xs:element>
+			
+										<xs:element name = "leafColour">
+                                            <xs:simpleType>
+                                                <xs:restriction base = "xs:string">
+                                                    <xs:pattern value = "([a-zA-Zа-яА-Я])+"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+										</xs:element>
+			
+										<xs:element name = "aveLenFlower" minOccurs = "0">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base = "xs:positiveInteger">
+														<xs:attribute name = "measure" type = "xs:string"
+																use = "required" fixed = "cm"/>  
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+			
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+			
+							<xs:element name = "growingTips">
+								<xs:complexType>
+									<xs:sequence>
+					
+										<xs:element name = "tempreture">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base = "xs:positiveInteger">
+														<xs:attribute name = "measure" type = "xs:string"
+																use = "required" fixed = "celcius"/>
+														</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+			
+										<xs:element name = "lighting">
+											<xs:complexType>
+												<xs:attribute name = "lightRequiring" use = "required">
+													<xs:simpleType>
+														<xs:restriction base = "xs:string">
+															<xs:enumeration value = "yes"/>
+															<xs:enumeration value = "no"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute> 
+											</xs:complexType>
+										</xs:element>
+			
+										<xs:element name = "watering" minOccurs = "0">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base = "xs:positiveInteger">
+														<xs:attribute name = "measure" type = "xs:string"
+																use = "required" fixed = "mlPerWeek"/>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+							
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>	
+			
+							<xs:element name = "multiplying">
+								<xs:simpleType>
+									<xs:restriction base = "xs:string">
+										<xs:enumeration value = "листья"/>
+										<xs:enumeration value = "черенки"/>
+										<xs:enumeration value = "семена"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>		
+			
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+					
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+</xs:schema>

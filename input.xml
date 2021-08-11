@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flowers xmlns="http://www.nure.ua"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.nure.ua input.xsd ">
+	
+	<flower>
+		<name>Rose</name>
+		<soil>дерново-подзолистая</soil>
+		<origin>China</origin>
+		<visualParameters>
+			<stemColour>green</stemColour>
+			<leafColour>green</leafColour>
+			<aveLenFlower measure = "cm">10</aveLenFlower>
+		</visualParameters>
+		<growingTips>
+			<tempreture measure = "celcius">25</tempreture>
+			<lighting lightRequiring = "yes"/>
+			<watering measure = "mlPerWeek">110</watering>
+		</growingTips>
+		<multiplying>черенки</multiplying>
+	</flower>	
+	
+	<flower>
+		<name>Bambusa</name>
+		<soil>дерново-подзолистая</soil>
+		<origin>China</origin>
+		<visualParameters>
+			<stemColour>green</stemColour>
+			<leafColour>green</leafColour>
+			<aveLenFlower measure = "cm">1100</aveLenFlower>
+		</visualParameters>
+		<growingTips>
+			<tempreture measure = "celcius">30</tempreture>
+			<lighting lightRequiring = "yes"/>
+			<watering measure = "mlPerWeek">250</watering>
+		</growingTips>
+		<multiplying>черенки</multiplying>
+	</flower>	
+		
+</flowers>
