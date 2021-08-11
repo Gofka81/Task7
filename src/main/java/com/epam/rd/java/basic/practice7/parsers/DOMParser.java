@@ -2,10 +2,7 @@ package com.epam.rd.java.basic.practice7.parsers;
 
 import com.epam.rd.java.basic.practice7.constants.Constants;
 import com.epam.rd.java.basic.practice7.constants.XMLConstats;
-import com.epam.rd.java.basic.practice7.entity.Flower;
-import com.epam.rd.java.basic.practice7.entity.Flowers;
-import com.epam.rd.java.basic.practice7.entity.GrowingTips;
-import com.epam.rd.java.basic.practice7.entity.VisualParameters;
+import com.epam.rd.java.basic.practice7.entity.*;
 import com.epam.rd.java.basic.practice7.util.Saving;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -189,8 +186,8 @@ public class DOMParser {
         return visualParameters;
     }
 
-    private VisualParameters.AveLenFlower getAveLenFlower(Node vNode){
-        VisualParameters.AveLenFlower aveLenFlower = new VisualParameters.AveLenFlower();
+    private AveLenFlower getAveLenFlower(Node vNode){
+        AveLenFlower aveLenFlower = new AveLenFlower();
         Element aElement = (Element) vNode;
 
         Node node = aElement.getElementsByTagName(XMLConstats.AVELENFLOWER.value()).item(0);
@@ -204,16 +201,16 @@ public class DOMParser {
         Element element = (Element) vNode;
 
         Node node = element.getElementsByTagName(XMLConstats.TEMPERETURE.value()).item(0);
-        growingTips.setTempreture(new GrowingTips.Tempreture());
+        growingTips.setTempreture(new Tempreture());
         growingTips.getTempreture().setValue(BigInteger.valueOf(Integer.parseInt(node.getTextContent())));
         growingTips.getTempreture().setMeasure(node.getAttributes().item(0).getTextContent());
 
         node = element.getElementsByTagName(XMLConstats.LIGHTNING.value()).item(0);
-        growingTips.setLighting(new GrowingTips.Lighting());
+        growingTips.setLighting(new Lighting());
         growingTips.getLighting().setLightRequiring(node.getAttributes().item(0).getTextContent());
 
         node = element.getElementsByTagName(XMLConstats.WATERING.value()).item(0);
-        growingTips.setWatering(new GrowingTips.Watering());
+        growingTips.setWatering(new Watering());
         growingTips.getWatering().setValue(BigInteger.valueOf(Integer.parseInt(node.getTextContent())));
         growingTips.getWatering().setMeasure(node.getAttributes().item(0).getTextContent());
 

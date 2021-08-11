@@ -1,10 +1,7 @@
 package com.epam.rd.java.basic.practice7.parsers;
 
 import com.epam.rd.java.basic.practice7.constants.XMLConstats;
-import com.epam.rd.java.basic.practice7.entity.Flower;
-import com.epam.rd.java.basic.practice7.entity.Flowers;
-import com.epam.rd.java.basic.practice7.entity.GrowingTips;
-import com.epam.rd.java.basic.practice7.entity.VisualParameters;
+import com.epam.rd.java.basic.practice7.entity.*;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -71,28 +68,28 @@ public class STAXParser extends DefaultHandler {
                     growingTips = new GrowingTips();
                 }else
                 if(currentElement == XMLConstats.AVELENFLOWER.value()){
-                    visualParameters.setAveLenFlower(new VisualParameters.AveLenFlower());
+                    visualParameters.setAveLenFlower(new AveLenFlower());
                     Attribute attribute = startElement.getAttributeByName(
                             new QName(XMLConstats.MEASURE.value()));
                     if (attribute != null)
                         visualParameters.getAveLenFlower().setMeasure(attribute.getValue());
                 }else
                 if(currentElement == XMLConstats.TEMPERETURE.value()){
-                    growingTips.setTempreture(new GrowingTips.Tempreture());
+                    growingTips.setTempreture(new Tempreture());
                     Attribute attribute = startElement.getAttributeByName(
                             new QName(XMLConstats.MEASURE.value()));
                     if (attribute != null)
                         growingTips.getTempreture().setMeasure(attribute.getValue());
                 }else
                 if(currentElement == XMLConstats.LIGHTNING.value()){
-                    growingTips.setLighting(new GrowingTips.Lighting());
+                    growingTips.setLighting(new Lighting());
                     Attribute attribute = startElement.getAttributeByName(
                             new QName(XMLConstats.LIGHTREQUIRING.value()));
                     if (attribute != null)
                         growingTips.getLighting().setLightRequiring(attribute.getValue());
                 }else
                 if(currentElement == XMLConstats.WATERING.value()){
-                    growingTips.setWatering(new GrowingTips.Watering());
+                    growingTips.setWatering(new Watering());
                     Attribute attribute = startElement.getAttributeByName(
                             new QName(XMLConstats.MEASURE.value()));
                     if (attribute != null)

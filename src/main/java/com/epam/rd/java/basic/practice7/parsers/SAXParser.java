@@ -2,10 +2,7 @@ package com.epam.rd.java.basic.practice7.parsers;
 
 import com.epam.rd.java.basic.practice7.constants.Constants;
 import com.epam.rd.java.basic.practice7.constants.XMLConstats;
-import com.epam.rd.java.basic.practice7.entity.Flower;
-import com.epam.rd.java.basic.practice7.entity.Flowers;
-import com.epam.rd.java.basic.practice7.entity.GrowingTips;
-import com.epam.rd.java.basic.practice7.entity.VisualParameters;
+import com.epam.rd.java.basic.practice7.entity.*;
 import org.xml.sax.*;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -64,27 +61,27 @@ public class SAXParser extends DefaultHandler {
             growingTips = new GrowingTips();
         }else
         if(currentElement == XMLConstats.AVELENFLOWER.value()){
-            visualParameters.setAveLenFlower(new VisualParameters.AveLenFlower());
+            visualParameters.setAveLenFlower(new AveLenFlower());
             if(attributes.getLength()> 0){
                 visualParameters.getAveLenFlower().setMeasure(attributes.getValue(uri,
                         XMLConstats.MEASURE.value()));
             }
         }else
         if(currentElement == XMLConstats.TEMPERETURE.value()){
-            growingTips.setTempreture(new GrowingTips.Tempreture());
+            growingTips.setTempreture(new Tempreture());
             if(attributes.getLength()> 0){
                 growingTips.getTempreture().setMeasure(attributes.getValue(uri,
                         XMLConstats.MEASURE.value()));
             }
         }else
         if(currentElement == XMLConstats.LIGHTNING.value()){
-            growingTips.setLighting(new GrowingTips.Lighting());
+            growingTips.setLighting(new Lighting());
             if(attributes.getLength()> 0){
                 growingTips.getLighting().setLightRequiring(attributes.getValue(0));
             }
         }else
         if(currentElement == XMLConstats.WATERING.value()){
-            growingTips.setWatering(new GrowingTips.Watering());
+            growingTips.setWatering(new Watering());
             if(attributes.getLength()> 0){
                 growingTips.getWatering().setMeasure(attributes.getValue(uri,
                         XMLConstats.WATERING.value()));
