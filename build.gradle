@@ -4,7 +4,7 @@ apply plugin: 'pmd'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 
-def junitVersion = '4.12'
+def junitVersion = '4.13.2'
 def pmdVersion = '6.18.0'
 def checkstyleVersion = '7.8.1'
 def findbugsVersion = '3.0.1'
