@@ -10,7 +10,11 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 public class Saving {
-    public static void saveToXML(Document document, String xmlFileName)
+
+    private Saving(){
+    }
+
+    public static void saveToXML(Document document, String xmlFileName) //NOSONAR
             throws TransformerException {
         StreamResult result = new StreamResult(new File(xmlFileName));
 

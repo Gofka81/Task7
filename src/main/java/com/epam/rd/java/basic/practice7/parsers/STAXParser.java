@@ -18,12 +18,12 @@ public class STAXParser extends DefaultHandler {
 
     private String currentElement; // <-- current element name holder
 
-    private Flowers flowers; // <-- main container
-    private Flower flower;
-    private GrowingTips growingTips;
-    private VisualParameters visualParameters;
+    private Flowers flowers2; // <-- main container
+    private Flower flower2;
+    private GrowingTips growingTips2;
+    private VisualParameters visualParameters2;
 
-    public Flowers getFlowers(){return flowers;}
+    public Flowers getFlowers(){return flowers2;}
 
     public STAXParser(String xmlFileName) {
         this.xmlFileName = xmlFileName;
@@ -32,7 +32,7 @@ public class STAXParser extends DefaultHandler {
     public void parse() throws XMLStreamException {
 
         XMLInputFactory factory = XMLInputFactory.newInstance();
-
+        factory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
         factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true);
 
         XMLEventReader reader = factory.createXMLEventReader(
@@ -69,90 +69,90 @@ public class STAXParser extends DefaultHandler {
     }
     public void startTags(StartElement startElement){
         if(Objects.equals(currentElement, XMLConstats.FLOWERS.value())){
-            flowers = new Flowers();
+            flowers2 = new Flowers();
         }else
         if(Objects.equals(currentElement, XMLConstats.FLOWER.value())){
-            flower = new Flower();
+            flower2 = new Flower();
         }else
         if(Objects.equals(currentElement, XMLConstats.VISUALPARAMETERS.value())){
-            visualParameters = new VisualParameters();
+            visualParameters2 = new VisualParameters();
         }else
         if(Objects.equals(currentElement, XMLConstats.GROWINGTIPS.value())){
-            growingTips = new GrowingTips();
+            growingTips2 = new GrowingTips();
         }else
         if(Objects.equals(currentElement, XMLConstats.AVELENFLOWER.value())){
-            visualParameters.setAveLenFlower(new AveLenFlower());
+            visualParameters2.setAveLenFlower(new AveLenFlower());
             Attribute attribute = startElement.getAttributeByName(
                     new QName(XMLConstats.MEASURE.value()));
             if (attribute != null)
-                visualParameters.getAveLenFlower().setMeasure(attribute.getValue());
+                visualParameters2.getAveLenFlower().setMeasure(attribute.getValue());
         }else
             startTagsGrowingTips(startElement);
     }
 
     public void startTagsGrowingTips(StartElement startElement){
         if(Objects.equals(currentElement, XMLConstats.TEMPERETURE.value())){
-            growingTips.setTempreture(new Tempreture());
+            growingTips2.setTempreture(new Tempreture());
             Attribute attribute = startElement.getAttributeByName(
                     new QName(XMLConstats.MEASURE.value()));
             if (attribute != null)
-                growingTips.getTempreture().setMeasure(attribute.getValue());
+                growingTips2.getTempreture().setMeasure(attribute.getValue());
         }else
         if(Objects.equals(currentElement, XMLConstats.LIGHTNING.value())){
-            growingTips.setLighting(new Lighting());
+            growingTips2.setLighting(new Lighting());
             Attribute attribute = startElement.getAttributeByName(
                     new QName(XMLConstats.LIGHTREQUIRING.value()));
             if (attribute != null)
-                growingTips.getLighting().setLightRequiring(attribute.getValue());
+                growingTips2.getLighting().setLightRequiring(attribute.getValue());
         }else
         if(Objects.equals(currentElement, XMLConstats.WATERING.value())){
-            growingTips.setWatering(new Watering());
+            growingTips2.setWatering(new Watering());
             Attribute attribute = startElement.getAttributeByName(
                     new QName(XMLConstats.MEASURE.value()));
             if (attribute != null)
-                growingTips.getWatering().setMeasure(attribute.getValue());
+                growingTips2.getWatering().setMeasure(attribute.getValue());
         }
     }
 
     public void endTags(String localName){
         if(Objects.equals(localName, XMLConstats.FLOWER.value())){
-            flowers.getFlower().add(flower);
+            flowers2.getFlower().add(flower2);
         }else
         if(Objects.equals(localName, XMLConstats.VISUALPARAMETERS.value())){
-            flower.setVisualParameters(visualParameters);
+            flower2.setVisualParameters(visualParameters2);
         }else
         if(Objects.equals(localName, XMLConstats.GROWINGTIPS.value())){
-            flower.setGrowingTips(growingTips);
+            flower2.setGrowingTips(growingTips2);
         }
     }
 
     public void contentHandler(Characters characters){
         if (Objects.equals(currentElement, XMLConstats.NAME.value())) {
-            flower.setName(characters.getData());
+            flower2.setName(characters.getData());
         }else
         if (Objects.equals(currentElement, XMLConstats.SOIL.value())) {
-            flower.setSoil(characters.getData());
+            flower2.setSoil(characters.getData());
         }else
         if (Objects.equals(currentElement, XMLConstats.ORIGIN.value())) {
-            flower.setOrigin(characters.getData());
+            flower2.setOrigin(characters.getData());
         }else
         if(Objects.equals(currentElement, XMLConstats.STEAMCOLOUR.value())){
-            visualParameters.setStemColour(characters.getData());
+            visualParameters2.setStemColour(characters.getData());
         }else
         if(Objects.equals(currentElement, XMLConstats.LEAFCOLOUR.value())){
-            visualParameters.setLeafColour(characters.getData());
+            visualParameters2.setLeafColour(characters.getData());
         }else
         if(Objects.equals(currentElement, XMLConstats.AVELENFLOWER.value())){
-            visualParameters.getAveLenFlower().setValue(BigInteger.valueOf(Integer.parseInt(characters.getData())));
+            visualParameters2.getAveLenFlower().setValue(BigInteger.valueOf(Integer.parseInt(characters.getData())));
         }else
         if(Objects.equals(currentElement, XMLConstats.TEMPERETURE.value())){
-            growingTips.getTempreture().setValue(BigInteger.valueOf(Integer.parseInt(characters.getData())));
+            growingTips2.getTempreture().setValue(BigInteger.valueOf(Integer.parseInt(characters.getData())));
         }else
         if(Objects.equals(currentElement, XMLConstats.WATERING.value())){
-            growingTips.getWatering().setValue(BigInteger.valueOf(Integer.parseInt(characters.getData())));
+            growingTips2.getWatering().setValue(BigInteger.valueOf(Integer.parseInt(characters.getData())));
         }else
         if(Objects.equals(currentElement, XMLConstats.MULTIPLYING.value())){
-            flower.setMultiplying(characters.getData());
+            flower2.setMultiplying(characters.getData());
         }
     }
 }

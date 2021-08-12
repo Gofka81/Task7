@@ -24,7 +24,7 @@ public class SAXParser extends DefaultHandler {
         SAXParserFactory factory = SAXParserFactory.newInstance(
                 Constants.CLASS_SAX_PARSER_FACTORY_INTERNAL,
                 this.getClass().getClassLoader());
-
+        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         factory.setNamespaceAware(true);
         if(validate){
             factory.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);

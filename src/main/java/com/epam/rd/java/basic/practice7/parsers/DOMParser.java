@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,6 +41,7 @@ public class DOMParser {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(
                 Constants.CLASS_DOCUMENT_BUILDER_FACTORY_INTERNAL,
                 this.getClass().getClassLoader());
+        dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 
 
         dbf.setNamespaceAware(true);
@@ -77,6 +79,7 @@ public class DOMParser {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(
                 Constants.CLASS_DOCUMENT_BUILDER_FACTORY_INTERNAL,
                 DOMParser.class.getClassLoader());
+        dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 
 
         dbf.setNamespaceAware(true);
