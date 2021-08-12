@@ -89,12 +89,6 @@ public class DOMParser {
         Element tElement = document.createElementNS(
                 Constants.MY_NS__URI, XMLConstats.FLOWERS.value());
 
-
-        tElement.setAttributeNS(
-                XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI,
-                Constants.SCHEMA_LOCATION__ATTR_FQN,
-                Constants.SCHEMA_LOCATION__URI);
-
         document.appendChild(tElement);
 
         // add questions elements
