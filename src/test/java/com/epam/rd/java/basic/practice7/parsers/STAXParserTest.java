@@ -8,30 +8,32 @@ import org.junit.Test;
 
 import java.math.BigInteger;
 
-public class DOMParserTest {
+public class STAXParserTest {
     @Test
     public void isWorkingWithValidXML(){
         String xmlFileName = "input.xml";
-        DOMParser domController = new DOMParser(xmlFileName);
-        try {
-            domController.parse(true);
-            Flowers flowers = domController.getFlowers();
-            Sorting.setSortFlowersByFlowersName(flowers);
+        STAXParser staxController = new STAXParser(xmlFileName);
 
+
+        try {
+            staxController.parse();
+            Flowers flowers = staxController.getFlowers();
+
+            Sorting.setSortFlowersByWateringMeasure(flowers);
             boolean check = true;
 
             Flower flower = flowers.getFlower().get(0);
-            if(!flower.getName().equals("Bambusa") && !flower.getSoil().equals("дерново-подзолистая")&&!flower.getOrigin().equals("China")){
+            if(!flower.getName().equals("Rose") && !flower.getSoil().equals("дерново-подзолистая")&&!flower.getOrigin().equals("China")){
                 check = false;
             }
-            if(!flower.getVisualParameters().getAveLenFlower().getMeasure().equals("cm") && !flower.getVisualParameters().getAveLenFlower().getValue().equals(BigInteger.valueOf(1100))){
+            if(!flower.getVisualParameters().getAveLenFlower().getMeasure().equals("cm") && !flower.getVisualParameters().getAveLenFlower().getValue().equals(BigInteger.valueOf(10))){
                 check = false;
             }
             if(!flower.getVisualParameters().getLeafColour().equals("green") &&!flower.getVisualParameters().getStemColour().equals("green")){
                 check = false;
             }
             Assert.assertTrue(check);
-        } catch (Exception e) {
+        }catch (Exception e){
             Assert.fail();
         }
     }
