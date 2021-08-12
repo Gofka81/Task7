@@ -86,8 +86,7 @@ public class DOMParser {
         Document document = db.newDocument();
 
 
-        Element tElement = document.createElementNS(
-                Constants.MY_NS__URI, XMLConstats.FLOWERS.value());
+        Element tElement = document.createElement(XMLConstats.FLOWERS.value());
 
         document.appendChild(tElement);
 
