@@ -1,7 +1,6 @@
 package com.epam.rd.java.basic.practice7.entity;
 
 import javax.xml.bind.annotation.*;
-import java.math.BigInteger;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {

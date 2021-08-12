@@ -12,7 +12,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,14 +38,14 @@ public class DOMParser {
             SAXException, IOException {
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(
-                Constants.CLASS__DOCUMENT_BUILDER_FACTORY_INTERNAL,
+                Constants.CLASS_DOCUMENT_BUILDER_FACTORY_INTERNAL,
                 this.getClass().getClassLoader());
 
 
         dbf.setNamespaceAware(true);
         if (validate) {
-            dbf.setFeature(Constants.FEATURE__TURN_VALIDATION_ON, true);
-            dbf.setFeature(Constants.FEATURE__TURN_SCHEMA_VALIDATION_ON, true);
+            dbf.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);
+            dbf.setFeature(Constants.FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
         }
 
         DocumentBuilder db = dbf.newDocumentBuilder();
@@ -76,7 +75,7 @@ public class DOMParser {
     public static void saveXML(Flowers flowers, String xmlFileName)
             throws ParserConfigurationException, TransformerException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(
-                Constants.CLASS__DOCUMENT_BUILDER_FACTORY_INTERNAL,
+                Constants.CLASS_DOCUMENT_BUILDER_FACTORY_INTERNAL,
                 DOMParser.class.getClassLoader());
 
 

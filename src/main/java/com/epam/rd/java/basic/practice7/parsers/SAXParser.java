@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.Objects;
 
 public class SAXParser extends DefaultHandler {
     private String xmlFileName;
@@ -21,13 +22,13 @@ public class SAXParser extends DefaultHandler {
     public void parse(boolean validate) throws SAXException,
             ParserConfigurationException, IOException {
         SAXParserFactory factory = SAXParserFactory.newInstance(
-                Constants.CLASS__SAX_PARSER_FACTORY_INTERNAL,
+                Constants.CLASS_SAX_PARSER_FACTORY_INTERNAL,
                 this.getClass().getClassLoader());
 
         factory.setNamespaceAware(true);
         if(validate){
-            factory.setFeature(Constants.FEATURE__TURN_VALIDATION_ON, true);
-            factory.setFeature(Constants.FEATURE__TURN_SCHEMA_VALIDATION_ON, true);
+            factory.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);
+            factory.setFeature(Constants.FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
         }
 
         javax.xml.parsers.SAXParser parser = factory.newSAXParser();
@@ -48,45 +49,26 @@ public class SAXParser extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         currentElement = localName;
 
-        if(currentElement == XMLConstats.FLOWERS.value()){
+        if(Objects.equals(currentElement, XMLConstats.FLOWERS.value())){
             flowers = new Flowers();
         }else
-        if(currentElement == XMLConstats.FLOWER.value()){
+        if(Objects.equals(currentElement, XMLConstats.FLOWER.value())){
             flower = new Flower();
         }else
-        if(currentElement == XMLConstats.VISUALPARAMETERS.value()){
+        if(Objects.equals(currentElement, XMLConstats.VISUALPARAMETERS.value())){
             visualParameters = new VisualParameters();
         }else
-        if(currentElement == XMLConstats.GROWINGTIPS.value()){
+        if(Objects.equals(currentElement, XMLConstats.GROWINGTIPS.value())){
             growingTips = new GrowingTips();
         }else
-        if(currentElement == XMLConstats.AVELENFLOWER.value()){
+        if(Objects.equals(currentElement, XMLConstats.AVELENFLOWER.value())){
             visualParameters.setAveLenFlower(new AveLenFlower());
             if(attributes.getLength()> 0){
                 visualParameters.getAveLenFlower().setMeasure(attributes.getValue(uri,
                         XMLConstats.MEASURE.value()));
             }
         }else
-        if(currentElement == XMLConstats.TEMPERETURE.value()){
-            growingTips.setTempreture(new Tempreture());
-            if(attributes.getLength()> 0){
-                growingTips.getTempreture().setMeasure(attributes.getValue(uri,
-                        XMLConstats.MEASURE.value()));
-            }
-        }else
-        if(currentElement == XMLConstats.LIGHTNING.value()){
-            growingTips.setLighting(new Lighting());
-            if(attributes.getLength()> 0){
-                growingTips.getLighting().setLightRequiring(attributes.getValue(0));
-            }
-        }else
-        if(currentElement == XMLConstats.WATERING.value()){
-            growingTips.setWatering(new Watering());
-            if(attributes.getLength()> 0){
-                growingTips.getWatering().setMeasure(attributes.getValue(uri,
-                        XMLConstats.WATERING.value()));
-            }
-        }
+            checkGrowingTips(uri,attributes);
     }
 
     /**
@@ -112,13 +94,13 @@ public class SAXParser extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
 
-        if(localName == XMLConstats.FLOWER.value()){
+        if(Objects.equals(localName, XMLConstats.FLOWER.value())){
             flowers.getFlower().add(flower);
         }else
-        if(localName == XMLConstats.VISUALPARAMETERS.value()){
+        if(Objects.equals(localName, XMLConstats.VISUALPARAMETERS.value())){
             flower.setVisualParameters(visualParameters);
         }else
-        if(localName == XMLConstats.GROWINGTIPS.value()){
+        if(Objects.equals(localName, XMLConstats.GROWINGTIPS.value())){
             flower.setGrowingTips(growingTips);
         }
 
@@ -147,32 +129,55 @@ public class SAXParser extends DefaultHandler {
         if (elementText.isEmpty()) // <-- return if content is empty
             return;
 
-        if (currentElement == XMLConstats.NAME.value()) {
+        if (Objects.equals(currentElement, XMLConstats.NAME.value())) {
             flower.setName(elementText);
         }else
-        if (currentElement == XMLConstats.SOIL.value()) {
+        if (Objects.equals(currentElement, XMLConstats.SOIL.value())) {
             flower.setSoil(elementText);
         }else
-        if (currentElement == XMLConstats.ORIGIN.value()) {
+        if (Objects.equals(currentElement, XMLConstats.ORIGIN.value())) {
             flower.setOrigin(elementText);
         }else
-        if(currentElement == XMLConstats.STEAMCOLOUR.value()){
+        if(Objects.equals(currentElement, XMLConstats.STEAMCOLOUR.value())){
             visualParameters.setStemColour(elementText);
         }else
-        if(currentElement == XMLConstats.LEAFCOLOUR.value()){
+        if(Objects.equals(currentElement, XMLConstats.LEAFCOLOUR.value())){
             visualParameters.setLeafColour(elementText);
         }else
-        if(currentElement == XMLConstats.AVELENFLOWER.value()){
+        if(Objects.equals(currentElement, XMLConstats.AVELENFLOWER.value())){
             visualParameters.getAveLenFlower().setValue(BigInteger.valueOf(Integer.parseInt(elementText)));
         }else
-        if(currentElement == XMLConstats.TEMPERETURE.value()){
+        if(Objects.equals(currentElement, XMLConstats.TEMPERETURE.value())){
             growingTips.getTempreture().setValue(BigInteger.valueOf(Integer.parseInt(elementText)));
         }else
-        if(currentElement == XMLConstats.WATERING.value()){
+        if(Objects.equals(currentElement, XMLConstats.WATERING.value())){
             growingTips.getWatering().setValue(BigInteger.valueOf(Integer.parseInt(elementText)));
         }else
-        if(currentElement == XMLConstats.MULTIPLYING.value()){
+        if(Objects.equals(currentElement, XMLConstats.MULTIPLYING.value())){
             flower.setMultiplying(elementText);
+        }
+    }
+
+    public void checkGrowingTips(String uri,Attributes attributes){
+        if(Objects.equals(currentElement, XMLConstats.TEMPERETURE.value())){
+            growingTips.setTempreture(new Tempreture());
+            if(attributes.getLength()> 0){
+                growingTips.getTempreture().setMeasure(attributes.getValue(uri,
+                        XMLConstats.MEASURE.value()));
+            }
+        }else
+        if(Objects.equals(currentElement, XMLConstats.LIGHTNING.value())){
+            growingTips.setLighting(new Lighting());
+            if(attributes.getLength()> 0){
+                growingTips.getLighting().setLightRequiring(attributes.getValue(0));
+            }
+        }else
+        if(Objects.equals(currentElement, XMLConstats.WATERING.value())){
+            growingTips.setWatering(new Watering());
+            if(attributes.getLength()> 0){
+                growingTips.getWatering().setMeasure(attributes.getValue(uri,
+                        XMLConstats.WATERING.value()));
+            }
         }
     }
 }
